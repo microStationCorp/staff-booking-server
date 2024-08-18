@@ -40,4 +40,19 @@ async function createStaff(req, res) {
   }
 }
 
-module.exports = { getStaffs, getStaffById, createStaff };
+//deleteStaff
+async function deleteStaff(req, res) {
+  const staffId = req.params.id;
+  try {
+    const staff = await staffClient.delete({
+      where: {
+        id: staffId,
+      },
+    });
+    res.status(200).json({ success: true });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+module.exports = { getStaffs, getStaffById, createStaff, deleteStaff };
