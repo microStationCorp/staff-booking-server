@@ -27,4 +27,17 @@ async function getStaffById(req, res) {
   }
 }
 
-module.exports = { getStaffs, getStaffById };
+//createStaff
+async function createStaff(req, res) {
+  const body = req.body;
+  try {
+    const staff = await staffClient.create({
+      data: body,
+    });
+    res.status(201).json({ success: true });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+module.exports = { getStaffs, getStaffById, createStaff };
