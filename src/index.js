@@ -10,6 +10,7 @@ const port = process.env.PORT;
 
 app.use(express.json());
 
+//MAIN LINKS
 app.use("/staffs", staffRouter);
 
 app.get("/", (req, res) => {

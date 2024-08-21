@@ -11,9 +11,29 @@ datasource db {
 }
 
 model Staff {
-  id          String @id @default(uuid())
+  id          String   @id @default(uuid())
   name        String
-  tnumber     String @unique
+  tnumber     String   @unique
   pnumber     String
   designation String
+  status      String   @default("SPARE") // STATUS VALUE WILL BE "LEAVE" "SPARE" "ESCORT"
+  escort      Escort[]
+}
+
+model Rake {
+  id              String   @id @default(uuid())
+  rake_name       Int
+  total_strength  Int
+  days_of_journey Int
+  start_journey   String
+  end_journey     String
+  escort          Escort[]
+}
+
+model Escort {
+  id       String @id @default(uuid())
+  rake     Rake   @relation(fields: [rake_id], references: [id])
+  rake_id  String
+  staff    Staff  @relation(fields: [staff_id], references: [id])
+  staff_id String
 }
